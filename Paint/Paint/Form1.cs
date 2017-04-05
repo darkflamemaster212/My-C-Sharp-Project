@@ -10,37 +10,98 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    
+    public enum drawMode
+    {
+        Pencil,
+        Brush,
+        Line,
+        Ellipse,
+        Rectangle,
+        FillEllipse,
+        FillRectangle,
+    }
     public partial class MainForm : Form
     {
-        private Point p1;
-        private Point p2;
-        private bool isDown;
+        /*vị trí chuột bắt đầu*/
+        private Point startPoint = new Point();
+        /*vị trí chuột hiện tại*/
+        private Point curPoint = new Point();
+        /*size*/
+        private int recSizeY = 0;
+        private int recSizeX = 0;
+        /*check mouse down*/
+        private bool mouseDown = false;
+        /*bitmap*/
         private Bitmap bm;
-        private Graphics gp;
+        /*shape đã chọn*/
+        private drawMode curMode;
+        /*màu line shape*/
         private Color curColor;
-        private Pen pen;
-        private int curPenSize;
+        /*pen*/
+        private Pen mPen;
+        /*line size*/
+        private float curLineSize=1;
+        /*solid brush*/
+        private SolidBrush mSolidBrush;
+        /*biến graphic*/
+        Graphics msPaint;
+        
 
         public MainForm()
         {
             InitializeComponent();
-            DrawSpace.MouseMove += DrawSpace_MouseMove;
-            DrawSpace.MouseUp += DrawSpace_MouseUp;
-            DrawSpace.Paint += DrawSpace_Paint;
-            bm = new Bitmap(DrawSpace.Width, DrawSpace.Height);
-            gp = Graphics.FromImage(bm);
-            curColor = new Color();
+            msPaint = DrawSpace.CreateGraphics();
+            bm = new Bitmap(DrawSpace.Width,DrawSpace.Height);
+            msPaint = Graphics.FromImage(bm);
+            /*default color*/
             curColor = Color.Black;
-            curPenSize = 11;
-            pen = new Pen(curColor,(float)curPenSize);
-            LetterSize();
+            /*set solid brush*/
+            mSolidBrush = new SolidBrush(curColor);
+            /*set pen*/
+            mPen = new Pen(curColor,curLineSize);
+            mPen.SetLineCap(System.Drawing.Drawing2D.LineCap.Round, System.Drawing.Drawing2D.LineCap.Round, System.Drawing.Drawing2D.DashCap.Round);
+            /*set mode*/
+            curMode = drawMode.Pencil;
+            /*disable line size*/
+            LineSize.Enabled = false;
+            LinesSize();
+
+
         }
-        //Vẽ
+        //vẽ
         private void DrawSpace_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawLine(pen, p1, p2);
+            if (mouseDown)
+            {
+                int dx = curPoint.X - startPoint.X;
+                int dy = curPoint.Y - startPoint.Y;
+                switch (curMode)
+                {
+                    case drawMode.Pencil:
+                        break;
+                    case drawMode.Brush:
+                        break;
+                    case drawMode.Line:
+                        e.Graphics.DrawLine(mPen,startPoint,curPoint);
+                        break;
+                    case drawMode.Ellipse:
+                        e.Graphics.DrawEllipse(mPen,startPoint.X,startPoint.Y,dx,dy);
+                        break;
+                    case drawMode.Rectangle:
+                        e.Graphics.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
+                        break;
+                    case drawMode.FillEllipse:
+                        e.Graphics.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                        break;
+                    case drawMode.FillRectangle:
+                        e.Graphics.FillRectangle(mSolidBrush,startPoint.X,startPoint.Y,dx,dy);
+                        break;
+                    default:
+                        MessageBox.Show("Error"); break;
+                }
+            }
         }
+
         //Thoát
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -49,25 +110,69 @@ namespace Paint
         //Nhấn chuột
         private void DrawSpace_MouseDown(object sender, MouseEventArgs e)
         {
-            p1 = new Point(e.Location.X,e.Location.Y);
-            isDown = true;
+            mouseDown = true;
+            startPoint = new Point(e.Location.X,e.Location.Y);
         }
         //Rê chuột
         private void DrawSpace_MouseMove(object sender, MouseEventArgs e)
         {
+            //hiện tọa độ
             toaDoX.Text = "" + e.Location.X;
             toaDoY.Text = "" + e.Location.Y;
-            if (isDown)
+            //vẽ
+            if (curMode == drawMode.Pencil || curMode == drawMode.Brush)
             {
-                p2 = new Point(e.Location.X,e.Location.Y);
-                DrawSpace.Refresh();
+                if (mouseDown == true)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        curPoint = e.Location;
+                        msPaint.DrawLine(mPen, startPoint, curPoint);
+                        startPoint = curPoint;
+                        DrawSpace.BackgroundImage = (Bitmap)bm.Clone();
+                    }
+                }
             }
-        }
+            else
+            {
+                if (mouseDown == true)
+                {
+                    curPoint = new Point(e.Location.X, e.Location.Y);
+                    DrawSpace.Refresh();
+                }
+            }
+
+}
         //Nhả chuột
         private void DrawSpace_MouseUp(object sender, MouseEventArgs e)
         {
-            isDown = false;
-            gp.DrawLine(pen, p1, p2);
+            mouseDown = false;
+            int dx = curPoint.X - startPoint.X;
+            int dy = curPoint.Y - startPoint.Y;
+            switch (curMode)
+            {
+                case drawMode.Pencil:
+                    break;
+                case drawMode.Brush:
+                    break;
+                case drawMode.Line:
+                    msPaint.DrawLine(mPen, startPoint, curPoint);
+                    break;
+                case drawMode.Ellipse:
+                    msPaint.DrawEllipse(mPen, startPoint.X, startPoint.Y, dx, dy);
+                    break;
+                case drawMode.Rectangle:
+                    msPaint.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
+                    break;
+                case drawMode.FillEllipse:
+                    msPaint.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                    break;
+                case drawMode.FillRectangle:
+                    msPaint.FillRectangle(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                    break;
+                default:
+                    MessageBox.Show("Error"); break;
+            }
             DrawSpace.BackgroundImage = (Bitmap)bm.Clone();
         }
         //Chỉnh màu ô trc
@@ -78,7 +183,7 @@ namespace Paint
             {
                 frontColor.BackColor = cld.Color;
                 curColor = cld.Color;
-                pen.Color = curColor;
+                mPen.Color = curColor;
             }
         }
         //chỉnh màu ô sau
@@ -97,11 +202,11 @@ namespace Paint
             frontColor.BackColor = behindColor.BackColor;
             behindColor.BackColor = temp;
             curColor = frontColor.BackColor;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
         //Size đường kẻ
         
-        private void LetterSize()
+        private void LinesSize()
         {
             for(int i = 1; i <=20; i++)
             {
@@ -112,56 +217,97 @@ namespace Paint
         // Thay đổi Line Size
         private void LineSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            curPenSize = int.Parse(LineSize.Text);
-            pen.Width = curPenSize;
+            curLineSize = int.Parse(LineSize.Text);
+            mPen.Width = curLineSize;
         }
         //màu mẫu
         private void blackColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.Black;
             curColor = Color.Black;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void whiteColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.White;
             curColor = Color.White;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void redColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.Red;
             curColor = Color.Red;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void greenColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.Green;
             curColor = Color.Green;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void blueColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.Blue;
             curColor = Color.Blue;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void yellowColor_Click(object sender, EventArgs e)
         {
             frontColor.BackColor = Color.Yellow;
             curColor = Color.Yellow;
-            pen.Color = curColor;
+            mPen.Color = curColor;
         }
 
         private void DrawSpace_MouseLeave(object sender, EventArgs e)
         {
             toaDoX.Text = "";
             toaDoY.Text = "";
+        }
+        private void toolStrip1_Click(object sender, EventArgs e)
+        {
+           foreach(ToolStripButton item in toolStrip1.Items)
+            {
+                if (item == sender)
+                    item.Checked = true;
+                else
+                    item.Checked = false;
+            }
+        }
+
+        private void Brush_Click(object sender, EventArgs e)
+        {
+            curMode = drawMode.Brush;
+            curLineSize = 1;
+            LineSize.Enabled = true;
+        }
+
+        private void Pencil_Click(object sender, EventArgs e)
+        {
+            curMode = drawMode.Pencil;
+            LineSize.Enabled = false;
+        }
+
+        private void line_Click(object sender, EventArgs e)
+        {
+            curMode = drawMode.Line;
+            LineSize.Enabled = true;
+        }
+
+        private void ellipse_Click(object sender, EventArgs e)
+        {
+            curMode = drawMode.Ellipse;
+            LineSize.Enabled = true;
+        }
+
+        private void rectangle_Click(object sender, EventArgs e)
+        {
+            curMode = drawMode.Rectangle;
+            LineSize.Enabled = true;
         }
     }
 }

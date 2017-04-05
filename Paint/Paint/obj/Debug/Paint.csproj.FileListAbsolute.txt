@@ -7,3 +7,12 @@ D:\C# project\Paint\Paint\obj\Debug\Paint.csproj.GenerateResource.Cache
 D:\C# project\Paint\Paint\obj\Debug\Paint.exe
 D:\C# project\Paint\Paint\obj\Debug\Paint.pdb
 D:\C# project\Paint\Paint\obj\Debug\Paint.MainForm.resources
+D:\Project\My-C-Sharp-Project\Paint\Paint\bin\Debug\Paint.exe.config
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.exe
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.pdb
+D:\Project\My-C-Sharp-Project\Paint\Paint\bin\Debug\Paint.exe
+D:\Project\My-C-Sharp-Project\Paint\Paint\bin\Debug\Paint.pdb
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.csprojResolveAssemblyReference.cache
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.MainForm.resources
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.Properties.Resources.resources
+D:\Project\My-C-Sharp-Project\Paint\Paint\obj\Debug\Paint.csproj.GenerateResource.Cache
