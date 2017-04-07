@@ -17,8 +17,6 @@ namespace Paint
         Line,
         Ellipse,
         Rectangle,
-        FillEllipse,
-        FillRectangle,
     }
     public partial class MainForm : Form
     {
@@ -45,6 +43,8 @@ namespace Paint
         private SolidBrush mSolidBrush;
         /*biến graphic*/
         Graphics msPaint;
+        /*biến xác định có fill không*/
+        private bool isFill = false;
         
 
         public MainForm()
@@ -85,16 +85,24 @@ namespace Paint
                         e.Graphics.DrawLine(mPen,startPoint,curPoint);
                         break;
                     case drawMode.Ellipse:
-                        e.Graphics.DrawEllipse(mPen,startPoint.X,startPoint.Y,dx,dy);
+                        if (isFill)
+                        {
+                            e.Graphics.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawEllipse(mPen, startPoint.X, startPoint.Y, dx, dy);
+                        }
                         break;
                     case drawMode.Rectangle:
-                        e.Graphics.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
-                        break;
-                    case drawMode.FillEllipse:
-                        e.Graphics.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
-                        break;
-                    case drawMode.FillRectangle:
-                        e.Graphics.FillRectangle(mSolidBrush,startPoint.X,startPoint.Y,dx,dy);
+                        if(isFill)
+                        {
+                            e.Graphics.FillRectangle(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
+                        }
                         break;
                     default:
                         MessageBox.Show("Error"); break;
@@ -159,16 +167,24 @@ namespace Paint
                     msPaint.DrawLine(mPen, startPoint, curPoint);
                     break;
                 case drawMode.Ellipse:
-                    msPaint.DrawEllipse(mPen, startPoint.X, startPoint.Y, dx, dy);
+                    if (isFill)
+                    {
+                        msPaint.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                    }
+                    else
+                    {
+                        msPaint.DrawEllipse(mPen, startPoint.X, startPoint.Y, dx, dy);
+                    }
                     break;
                 case drawMode.Rectangle:
-                    msPaint.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
-                    break;
-                case drawMode.FillEllipse:
-                    msPaint.FillEllipse(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
-                    break;
-                case drawMode.FillRectangle:
-                    msPaint.FillRectangle(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                    if (isFill)
+                    {
+                        msPaint.FillRectangle(mSolidBrush, startPoint.X, startPoint.Y, dx, dy);
+                    }
+                    else
+                    {
+                        msPaint.DrawRectangle(mPen, startPoint.X, startPoint.Y, dx, dy);
+                    }
                     break;
                 default:
                     MessageBox.Show("Error"); break;
@@ -184,6 +200,7 @@ namespace Paint
                 frontColor.BackColor = cld.Color;
                 curColor = cld.Color;
                 mPen.Color = curColor;
+                mSolidBrush.Color = curColor;
             }
         }
         //chỉnh màu ô sau
@@ -203,6 +220,7 @@ namespace Paint
             behindColor.BackColor = temp;
             curColor = frontColor.BackColor;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
         //Size đường kẻ
         
@@ -226,6 +244,7 @@ namespace Paint
             frontColor.BackColor = Color.Black;
             curColor = Color.Black;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void whiteColor_Click(object sender, EventArgs e)
@@ -233,6 +252,7 @@ namespace Paint
             frontColor.BackColor = Color.White;
             curColor = Color.White;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void redColor_Click(object sender, EventArgs e)
@@ -240,6 +260,7 @@ namespace Paint
             frontColor.BackColor = Color.Red;
             curColor = Color.Red;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void greenColor_Click(object sender, EventArgs e)
@@ -247,6 +268,7 @@ namespace Paint
             frontColor.BackColor = Color.Green;
             curColor = Color.Green;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void blueColor_Click(object sender, EventArgs e)
@@ -254,6 +276,7 @@ namespace Paint
             frontColor.BackColor = Color.Blue;
             curColor = Color.Blue;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void yellowColor_Click(object sender, EventArgs e)
@@ -261,6 +284,7 @@ namespace Paint
             frontColor.BackColor = Color.Yellow;
             curColor = Color.Yellow;
             mPen.Color = curColor;
+            mSolidBrush.Color = curColor;
         }
 
         private void DrawSpace_MouseLeave(object sender, EventArgs e)
@@ -308,6 +332,18 @@ namespace Paint
         {
             curMode = drawMode.Rectangle;
             LineSize.Enabled = true;
+        }
+
+        private void noneFill_Click(object sender, EventArgs e)
+        {
+            isFill = false;
+            fillStyle.Image = noneFill.Image;
+        }
+
+        private void solidFill_Click(object sender, EventArgs e)
+        {
+            fillStyle.Image = solidFill.Image;
+            isFill = true;
         }
     }
 }

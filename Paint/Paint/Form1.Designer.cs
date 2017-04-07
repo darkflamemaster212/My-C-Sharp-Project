@@ -54,6 +54,10 @@
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.fillStyle = new System.Windows.Forms.ToolStripDropDownButton();
+            this.noneFill = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidFill = new System.Windows.Forms.ToolStripMenuItem();
             this.switchColor = new System.Windows.Forms.PictureBox();
             this.frontColor = new System.Windows.Forms.PictureBox();
             this.behindColor = new System.Windows.Forms.PictureBox();
@@ -73,9 +77,6 @@
             this.toaDoX = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.toaDoY = new System.Windows.Forms.Label();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DrawSpace)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -275,7 +276,7 @@
             this.ellipse.Image = ((System.Drawing.Image)(resources.GetObject("ellipse.Image")));
             this.ellipse.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ellipse.Name = "ellipse";
-            this.ellipse.Size = new System.Drawing.Size(29, 20);
+            this.ellipse.Size = new System.Drawing.Size(21, 20);
             this.ellipse.Text = "toolStripButton2";
             this.ellipse.Click += new System.EventHandler(this.ellipse_Click);
             // 
@@ -286,7 +287,7 @@
             this.rectangle.Image = ((System.Drawing.Image)(resources.GetObject("rectangle.Image")));
             this.rectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rectangle.Name = "rectangle";
-            this.rectangle.Size = new System.Drawing.Size(29, 20);
+            this.rectangle.Size = new System.Drawing.Size(21, 20);
             this.rectangle.Text = "toolStripButton3";
             this.rectangle.Click += new System.EventHandler(this.rectangle_Click);
             // 
@@ -330,12 +331,47 @@
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
-            this.toolStripDropDownButton1});
+            this.fillStyle});
             this.toolStrip3.Location = new System.Drawing.Point(0, 36);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.Size = new System.Drawing.Size(592, 33);
             this.toolStrip3.TabIndex = 7;
             this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(54, 30);
+            this.toolStripLabel2.Text = "Fill Color";
+            // 
+            // fillStyle
+            // 
+            this.fillStyle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fillStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneFill,
+            this.solidFill});
+            this.fillStyle.Image = ((System.Drawing.Image)(resources.GetObject("fillStyle.Image")));
+            this.fillStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fillStyle.Name = "fillStyle";
+            this.fillStyle.Size = new System.Drawing.Size(29, 30);
+            this.fillStyle.Text = "toolStripDropDownButton1";
+            // 
+            // noneFill
+            // 
+            this.noneFill.BackColor = System.Drawing.SystemColors.Control;
+            this.noneFill.Image = ((System.Drawing.Image)(resources.GetObject("noneFill.Image")));
+            this.noneFill.Name = "noneFill";
+            this.noneFill.Size = new System.Drawing.Size(152, 22);
+            this.noneFill.Text = "none";
+            this.noneFill.Click += new System.EventHandler(this.noneFill_Click);
+            // 
+            // solidFill
+            // 
+            this.solidFill.Image = ((System.Drawing.Image)(resources.GetObject("solidFill.Image")));
+            this.solidFill.Name = "solidFill";
+            this.solidFill.Size = new System.Drawing.Size(152, 22);
+            this.solidFill.Text = "Solid";
+            this.solidFill.Click += new System.EventHandler(this.solidFill_Click);
             // 
             // switchColor
             // 
@@ -513,29 +549,6 @@
             this.toaDoY.Size = new System.Drawing.Size(0, 13);
             this.toaDoY.TabIndex = 8;
             // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noneToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 30);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(54, 30);
-            this.toolStripLabel2.Text = "Fill Color";
-            // 
-            // noneToolStripMenuItem
-            // 
-            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.noneToolStripMenuItem.Text = "none";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,8 +631,9 @@
         private System.Windows.Forms.ToolStripButton ellipse;
         private System.Windows.Forms.ToolStripButton rectangle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton fillStyle;
+        private System.Windows.Forms.ToolStripMenuItem noneFill;
+        private System.Windows.Forms.ToolStripMenuItem solidFill;
     }
 }
 

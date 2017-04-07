@@ -10,3 +10,16 @@ D:\Project\C# project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.pdb
 D:\Project\C# project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Danh_sách_tiệc_cưới.resources
 D:\Project\C# project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Hóa_Đơn.resources
 D:\Project\C# project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Báo_Cáo_Doanh_Số.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\bin\Debug\CMNNPM.exe.config
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.exe
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.pdb
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\bin\Debug\CMNNPM.exe
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\bin\Debug\CMNNPM.pdb
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.csprojResolveAssemblyReference.cache
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Báo_Cáo_Doanh_Số.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Danh_sách_tiệc_cưới.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Quản_lý.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Form1.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Hóa_Đơn.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.Properties.Resources.resources
+D:\Project\My-C-Sharp-Project\CMNNPM\CMNNPM\obj\Debug\CMNNPM.csproj.GenerateResource.Cache

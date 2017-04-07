@@ -52,11 +52,17 @@
     <Compile Include="Báo Cáo Doanh Số.Designer.cs">
       <DependentUpon>Báo Cáo Doanh Số.cs</DependentUpon>
     </Compile>
-    <Compile Include="Danh sách tiệc cưới.cs">
+    <Compile Include="Đặt thời gian.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Danh sách tiệc cưới.Designer.cs">
-      <DependentUpon>Danh sách tiệc cưới.cs</DependentUpon>
+    <Compile Include="Đặt thời gian.Designer.cs">
+      <DependentUpon>Đặt thời gian.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quản lý.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quản lý.Designer.cs">
+      <DependentUpon>Quản lý.cs</DependentUpon>
     </Compile>
     <Compile Include="Đặt tiệc.cs">
       <SubType>Form</SubType>
@@ -75,8 +81,11 @@
     <EmbeddedResource Include="Báo Cáo Doanh Số.resx">
       <DependentUpon>Báo Cáo Doanh Số.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Danh sách tiệc cưới.resx">
-      <DependentUpon>Danh sách tiệc cưới.cs</DependentUpon>
+    <EmbeddedResource Include="Đặt thời gian.resx">
+      <DependentUpon>Đặt thời gian.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quản lý.resx">
+      <DependentUpon>Quản lý.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Đặt tiệc.resx">
       <DependentUpon>Đặt tiệc.cs</DependentUpon>
