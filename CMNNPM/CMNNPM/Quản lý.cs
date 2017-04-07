@@ -102,11 +102,11 @@ namespace CMNNPM
             {
                 try
                 {
-                    if ((((int.Parse(cbYear.Text) % 4 == 0) &&
-                         !(int.Parse(cbYear.Text) % 100 == 0))
-                         || (int.Parse(cbYear.Text) % 400 == 0)))
-                        if (int.Parse(cbMonth.Text) == 2)
-
+                    monthCalendar1.SetDate(new DateTime(int.Parse(cbYear.Text), int.Parse(cbMonth.Text), 28));
+                }
+                catch
+                {
+                    return;
                 }
             }
         }
